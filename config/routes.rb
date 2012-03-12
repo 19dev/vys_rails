@@ -1,4 +1,28 @@
 VysRails::Application.routes.draw do
+  
+  get "a/404"
+
+  get "a/about"
+
+  get "a/contact"
+
+  get "a/home"
+
+  get "a/layout"
+
+  get "a/people"
+
+  get "a/work"
+
+  root :to => 'a#home'
+
+  match '/contact', :to => 'a#contact'
+  match '/about',   :to => 'a#about'
+  match '/404',    :to => 'a#404'
+  match '/layout',  :to => 'a#layout'
+  match '/people',  :to => 'a#people'
+  match '/work',  :to => 'a#work'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
