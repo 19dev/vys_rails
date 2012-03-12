@@ -6,7 +6,7 @@ VysRails::Application.routes.draw do
 
   get "a/contact"
 
-  get "a/home"
+  get "a/index"
 
   get "a/layout"
 
@@ -14,7 +14,7 @@ VysRails::Application.routes.draw do
 
   get "a/work"
 
-  root :to => 'a#home'
+  root :to => 'a#index'
 
   match '/contact', :to => 'a#contact'
   match '/about',   :to => 'a#about'

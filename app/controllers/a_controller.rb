@@ -7,7 +7,7 @@ class AController < ApplicationController
   def contact
   end
 
-  def home
+  def index
   end
 
   def layout
