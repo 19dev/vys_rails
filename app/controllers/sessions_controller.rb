@@ -6,10 +6,10 @@ def create
     user = User.find_by_username(params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to posts_path
+      render "a/deneme"
     else
       flash.now.alert = "Invalid username or password"
-      render "new"
+      redirect_to root_path
     end
   end
 end

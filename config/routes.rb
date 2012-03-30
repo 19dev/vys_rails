@@ -6,7 +6,8 @@ VysRails::Application.routes.draw do
   
 
   resources :forms
-  resources :sessions_path
+  resources :sessions
+  
   
   get "login" => "sessions#new", :as => "login"
 
@@ -20,6 +21,7 @@ VysRails::Application.routes.draw do
   match '/layout',  :to => 'a#layout'
   match '/people',  :to => 'a#people'
   match '/work',  :to => 'a#work'
+  match '/hata',  :to => 'a#deneme'
 
 end
   
