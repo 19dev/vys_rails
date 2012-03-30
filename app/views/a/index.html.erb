@@ -25,6 +25,33 @@
   
 </div>
 
+<h4> Kullanıcı Girişi </h4>
+
+  <%= form_tag sessions_path do  %>
+  <table class="login">
+      <tr>
+        <td class="label">
+    		<%= label_tag "Kullanıcı Ad" %>
+        </td>
+	<td class="field">
+    		<%= text_field_tag :username, params[:username] %>
+	</td>
+	</tr>
+  
+  <tr>
+        <td class="label">
+    		<%= label_tag :Parola %></td>
+	<td class="field">
+    		<%= password_field_tag :password %></td>
+  </tr>
+<tr>
+  
+  <td></td>
+        <td>
+    <%= submit_tag "Giriş Yap" , class: "button right" %></td></tr>
+</table>
+  
+  <% end %>
 
 
 
