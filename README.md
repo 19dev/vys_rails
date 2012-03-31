@@ -1,16 +1,3 @@
-# Size düşen nedir?
-
-kodlar,
-
-    $ git clone git@github.com:19bal/vys_rails.git
-    $ git checkout auth
-    $ bundle
-    $ rake db:migrate
-    $ rails s --binding=192.168.1.2
-
-Url olarak http://192.168.1.2:3000/ girip, giriş ve çıkışı, ayrıca Node:CRUD
-işlemlerini sınayın.
-
 # Nasıl?
 
 1) Öncelikle sadece statik sayfaların olduğu commit'i belirleyip ona
@@ -286,5 +273,95 @@ Son durumu commitleyelim,
 
     $ git add .
     $ git commit -a -m "auth:Ok"
+
+Authorization aşamasına geçmeden önce Login ve Logout linklerini ekleyelim.
+
+Önce `current_user` isminde her yerden erişilebilecek bir yardımcı işlev ekleyelim,
+
+    $ vim app/helpers/sessions_helper.rb
+    def current_user
+      session[:user_id] ? @current_user ||= User.find(session[:user_id]) : nil
+    end
+
+bu oturumu kontrol edip, eğer açıksa kullanıcıyı yoksa `nil` döndürecektir.
+
+Şablon sayfasında,
+
+    $ vim app/views/layouts/_header.html.erb
+        <div id="session">
+            <% if current_user  %>
+              Hoşgeldin <b><%= current_user.username %></b> |
+              <%= link_to "Çıkış", logout_url %>
+            <% else %>
+              Giriş yapmamışsınız |
+              <%= link_to "Giriş yap", login_url %>
+            <% end %>
+        </div>
+
+böylelikle `current_user` yöntemi çağrılır,
+
+        <% if current_user  %>
+
+oturum açıldıysa,
+
+       session[:user_id] ? @current_user ||= User.find(session[:user_id]) : nil
+
+Hoşgeldin,
+
+
+        Hoşgeldin <b><%= current_user.username %></b> |
+
+kullanıcı adı ise `@current_user` değişkeninden gelir. Yöntem üzerinden
+değişkenin (ve hatta tablonun sütununa) erişmenin rails'cesi. Çıkış için
+`logout_url` sini göstersin istiyoruz, fakat tanımlamadık rails bize şöyle
+tepki vererek cevap veriyor,
+
+    NameError in Nodes#index
+
+    Showing /home/seyyah/work/_mutfak/vys_rails/app/views/layouts/_header.html.erb
+    where line #4 raised:
+
+    undefined local variable or method `logout_url' for
+
+bunun sebebi buna dair bir yönlendirmemizin olmaması,
+
+    $ vim config/routes.rb
+    get "logout" => "sessions#destroy", :as => "logout"
+
+bu ise "sessions#destroy" dan ötürü SessionsController'da `destroy` yöntemini
+gerektirir,
+
+    $ vim app/controllers/sessions_controller.rb
+    def destroy
+      session[:user_id] = nil
+      redirect_to root_url
+    end
+
+logout et,
+
+        session[:user_id] = nil
+
+ve anasayfaya yönlen,
+
+        redirect_to root_url
+
+Url olarak http://192.168.1.2:3000/ girelim. Evet üstte,
+
+    Hoşgeldin seyyah | Çıkış
+
+mesajı görülüyor. çıkış yapınca,
+
+    Giriş yapmamışsınız | Giriş yap
+
+görülüyor sırayla logout ve login'e yönlendirme söz konusudur.
+
+Authentication tamamdır, commitleyelim,
+
+    $ git add .
+    $ git commit -a -m "login-logout"
+
+ve bunu depoya push edelim,
+
+    $ git push origin auth
 
 
