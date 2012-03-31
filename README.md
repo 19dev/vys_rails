@@ -412,3 +412,41 @@ sebebi ne acaba,
     app[web.1]: [...]
 
 cevabı geldi bile,
+
+    css/home.css isn't precompiled
+
+balık tutmayı öğrenelim. Bu nerede oldu heroku'da hata ney yukarıda,
+
+    Google: heroku css/home.css isn't precompiled
+
+ilk sonuç:
+http://stackoverflow.com/questions/7275636/rails-3-1-0-actionviewtemplateerrror-application-css-isnt-precompiled
+
+> # config/environments/production.rb
+> ...
+> config.assets.compile = true
+
+o zaman,
+
+    $ vim config/environments/production.rb
+    config.assets.compile = true
+
+yani production ayağında (herkese sunduğumuz hali ki bunu şimdilik heroku
+üzerinden yapıyoruz) asset'leri (css vs) önden derle ki daha sonradan derlemenin
+şu şekilde otomatik yapıldığını göreceksiniz,
+
+    $ git push heroku-bsaral-vys auth:master
+    [...]
+    Running: rake assets:precompile
+    [...]
+
+commitle ve github'a gönder,
+
+    $ git commit -a -m "production:asset:precompiled:true"
+    $ git push origin auth
+
+ardından heroku'ya da gönder,
+
+    $ git push heroku-bsaral-vys auth:master
+
+Test zamanıdır, http://bsaral-vys-auth.herokuapp.com.
