@@ -6,10 +6,15 @@ kodlar,
     $ git checkout auth
     $ bundle
     $ rake db:migrate
+    $ rake db:seed
     $ rails s --binding=192.168.1.2
 
 Url olarak http://192.168.1.2:3000/ girip, giriş ve çıkışı, ayrıca Node:CRUD
 işlemlerini sınayın.
+
+Heroku tarafında test için http://bsaral-vys-auth.herokuapp.com.
+
+Örnek kullanıcı: "seyyah:secret"
 
 # Nasıl?
 
