@@ -1,3 +1,16 @@
+# Size düşen nedir?
+
+kodlar,
+
+    $ git clone git@github.com:19bal/vys_rails.git
+    $ git checkout auth
+    $ bundle
+    $ rake db:migrate
+    $ rails s --binding=192.168.1.2
+
+Url olarak http://192.168.1.2:3000/ girip, giriş ve çıkışı, ayrıca Node:CRUD
+işlemlerini sınayın.
+
 # Nasıl?
 
 1) Öncelikle sadece statik sayfaların olduğu commit'i belirleyip ona
