@@ -1,9 +1,10 @@
 SIM'in rails versiyonu
 
-YAPILMASI GEREKENLER:
+#YAPILMASI GEREKENLER:
 
-<li>$git clone https://bsaral@github.com/bsaral/vys_rails.git</li>
-<li>$cd vys_rails</li>
-<li>$bundle</li>
-<li>$rake db:migrate</li>
-<li>$rake db:seed</li>
+	~$git clone https://bsaral@github.com/bsaral/vys_rails.git
+	~$cd vys_rails
+	~$bundle
+	~$rake db:migrate
+	~$rake db:seed
+	~$rails s 
