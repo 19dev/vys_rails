@@ -3,9 +3,26 @@
 <head>
   <title>VysRails</title>
   <%= render 'layouts/stylesheets' %>
-  
+
 </head>
  <body>
+
+<div class="container" style="margin-bottom: 80px;" >
+   <div class="content">
+     <div class="row">
+       <div class="span9">
+        <% [:notice, :error, :alert].each do |level| %>
+          <% unless flash[level].blank? %>
+            <div data-alert="alert" class="alert alert-<%= level %> fade in">
+                <a class="close" data-dismiss="alert" href="#">&times;</a>
+                <%= content_tag :p, simple_format(flash[level]) %>
+            </div>
+           <% end %>
+        <% end %>
+       </div>
+   </div>
+</div>
+
  <div class="container">
       <%= render 'layouts/header' %>
       <section class="round">
