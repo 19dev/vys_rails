@@ -377,4 +377,38 @@ ve bunu depoya push edelim,
 
     $ git push origin auth
 
+# Heroku
 
+Önce heroku app oluşturalım,
+
+    $ git checkout auth
+    $ heroku create bsaral-vys-auth --stack cedar --remote heroku-bsaral-vys
+
+app ismi `bsaral-vys-auth`, buna http://bsaral-vys-auth.herokuapp.com adresinden
+ulaşabileceğimiz anlamına geliyor. Stack kısmında aksi belirtilmediği sürece
+`cedar`'ı kullanın bu heroku'nun en son çıkardığı runtime stack yapısı.
+
+https://devcenter.heroku.com/articles/cedar
+https://devcenter.heroku.com/articles/stack
+
+depoyu heroku'ya itelim,
+
+    $ git push heroku-bsaral-vys auth:master
+
+migrasyon ve seed,
+
+    $ heroku run rake db:migrate --app bsaral-vys-auth
+    $ heroku run rake db:seed    --app bsaral-vys-auth
+
+Test zamanıdır, http://bsaral-vys-auth.herokuapp.com, hata mesajı alıyorum,
+
+    We're sorry, but something went wrong.
+
+sebebi ne acaba,
+
+    $ heroku logs -t
+    app[web.1]: [...]
+    app[web.1]: ActionView::Template::Error (css/home.css isn't precompiled):
+    app[web.1]: [...]
+
+cevabı geldi bile,
