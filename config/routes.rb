@@ -1,5 +1,7 @@
 VysRails::Application.routes.draw do
   
+  resources :nodes
+
   get "a/404"
 
   get "a/about"
