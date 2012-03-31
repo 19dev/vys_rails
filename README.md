@@ -282,6 +282,13 @@ kullanıcıyı ekledik tekrar url'de http://192.168.1.2:3000/login girip formu "
 olmalıyız: http://192.168.1.2:3000/nodes. Burada CRUD yapabiliyor olmalısınız.
 Authentication aşaması tamamlandı.
 
+Edit: bu console'da oluşturma işlemini otomatize edelim,
+
+    $ vim db/seeds.rb
+    User.create(:username => "seyyah", :password => "secret", :password_confirmation => "secret")
+
+    $ rake db:seed
+
 Son durumu commitleyelim,
 
     $ git add .
